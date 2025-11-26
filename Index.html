@@ -26,7 +26,7 @@
 
     <header class="header" id="header">
         <div class="header-content">
-            <div class="logo-container">
+            <div id="logoContainer" class="logo-container">
                 <div class="logo-circle">DR</div>
                 <div class="logo-text">
                     <h1 id="storeName">Loja DR</h1>
@@ -71,6 +71,10 @@
                     <h3>➕ Adicionar Produto</h3>
                     <form id="productForm">
                         <!-- ÁREA DE UPLOAD DE IMAGEM -->
+                        <div class="form-actions" style="margin-top: 15px;">
+    <button type="button" id="loadDraftBtn" class="btn-secondary btn-sm">💾 Carregar Rascunho</button>
+    <button type="button" id="clearDraftBtn" class="btn-danger btn-sm">🗑️ Limpar Rascunho</button>
+</div>
                         <div class="form-group">
                             <label>Upload de Imagem</label>
                             <div id="uploadArea" class="image-upload-area">
@@ -116,29 +120,145 @@
                                 <input type="number" id="productPromoPrice" class="form-input" step="0.01" min="0">
                             </div>
                         </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="productCategory">Categoria</label>
-                                <select id="productCategory" class="form-input">
-                                    <option value="">Selecione...</option>
-                                    <option value="Camisetas">Camisetas</option>
-                                    <option value="Calças">Calças</option>
-                                    <option value="Vestidos">Vestidos</option>
-                                    <option value="Bermudas">Bermudas</option>
-                                    <option value="Bonés">Bonés</option>
-                                    <option value="Tênis">Tênis</option>
-                                    <option value="Acessórios">Acessórios</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="productSizes">Tamanhos</label>
-                                <input type="text" id="productSizes" class="form-input" placeholder="P, M, G, GG">
-                            </div>
-                        </div>
                         <div class="form-group">
-                            <label for="productColors">Cores Disponíveis</label>
-                            <input type="text" id="productColors" class="form-input" placeholder="Preto, Branco, Azul">
+                            <label for="productCategory">Categoria</label>
+                            <select id="productCategory" class="form-input">
+                                <option value="">Selecione...</option>
+                                <option value="Camisetas">Camisetas</option>
+                                <option value="Calças">Calças</option>
+                                <option value="Vestidos">Vestidos</option>
+                                <option value="Bermudas">Bermudas</option>
+                                <option value="Bonés">Bonés</option>
+                                <option value="Tênis">Tênis</option>
+                                <option value="Acessórios">Acessórios</option>
+                                <option value="Conjunto">Conjunto</option>
+                            </select>
                         </div>
+                        
+                        <div class="form-group">
+                            <label>Tamanhos Disponíveis</label>
+                            <div class="checkbox-grid">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="tamanho-PP" name="tamanhos" value="PP">
+                                    <label for="tamanho-PP">PP</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="tamanho-P" name="tamanhos" value="P">
+                                    <label for="tamanho-P">P</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="tamanho-M" name="tamanhos" value="M">
+                                    <label for="tamanho-M">M</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="tamanho-G" name="tamanhos" value="G">
+                                    <label for="tamanho-G">G</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="tamanho-GG" name="tamanhos" value="GG">
+                                    <label for="tamanho-GG">GG</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="tamanho-32" name="tamanhos" value="32">
+                                    <label for="tamanho-32">32</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="tamanho-33" name="tamanhos" value="33">
+                                    <label for="tamanho-33">33</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="tamanho-34" name="tamanhos" value="34">
+                                    <label for="tamanho-34">34</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="tamanho-35" name="tamanhos" value="35">
+                                    <label for="tamanho-35">35</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="tamanho-36" name="tamanhos" value="36">
+                                    <label for="tamanho-36">36</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="tamanho-37" name="tamanhos" value="37">
+                                    <label for="tamanho-37">37</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="tamanho-38" name="tamanhos" value="38">
+                                    <label for="tamanho-38">38</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="tamanho-39" name="tamanhos" value="39">
+                                    <label for="tamanho-39">39</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="tamanho-40" name="tamanhos" value="40">
+                                    <label for="tamanho-40">40</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="tamanho-41" name="tamanhos" value="41">
+                                    <label for="tamanho-41">41</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="tamanho-42" name="tamanhos" value="42">
+                                    <label for="tamanho-42">42</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Cores Disponíveis</label>
+                            <div class="checkbox-grid">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="cor-Branco" name="cores" value="Branco">
+                                    <label for="cor-Branco">Branco</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="cor-Cinza" name="cores" value="Cinza">
+                                    <label for="cor-Cinza">Cinza</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="cor-Preto" name="cores" value="Preto">
+                                    <label for="cor-Preto">Preto</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="cor-Bege" name="cores" value="Bege">
+                                    <label for="cor-Bege">Bege</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="cor-Vermelho" name="cores" value="Vermelho">
+                                    <label for="cor-Vermelho">Vermelho</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="cor-Azul" name="cores" value="Azul">
+                                    <label for="cor-Azul">Azul</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="cor-Verde" name="cores" value="Verde">
+                                    <label for="cor-Verde">Verde</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="cor-Amarelo" name="cores" value="Amarelo">
+                                    <label for="cor-Amarelo">Amarelo</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="cor-Rosa" name="cores" value="Rosa">
+                                    <label for="cor-Rosa">Rosa</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="cor-Roxo" name="cores" value="Roxo">
+                                    <label for="cor-Roxo">Roxo</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="cor-Marrom" name="cores" value="Marrom">
+                                    <label for="cor-Marrom">Marrom</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="cor-Laranja" name="cores" value="Laranja">
+                                    <label for="cor-Laranja">Laranja</label>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="form-check">
                             <input type="checkbox" id="productFeatured">
                             <label for="productFeatured">⭐ Produto em Destaque</label>
@@ -170,6 +290,36 @@
                 
                 <div class="appearance-grid">
                     <div class="appearance-section">
+                        <h4>🏪 Logo da Loja</h4>
+                        <div class="form-group">
+                            <label>Upload do Logo</label>
+                            <div id="logoUploadArea" class="image-upload-area">
+                                <input type="file" id="logoFile" accept="image/*" style="display: none;">
+                                <div id="logoUploadPlaceholder" class="upload-placeholder">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                        <polyline points="14,2 14,8 20,8"></polyline>
+                                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                                        <polyline points="10,9 9,9 8,9"></polyline>
+                                    </svg>
+                                    <p>Clique para selecionar ou arraste o logo</p>
+                                    <small>Formatos: JPG, PNG, GIF • Máx: 10MB</small>
+                                </div>
+                                <img id="logoPreview" class="image-preview" alt="Logo Preview" style="display:none;">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="logoUrl">URL do Logo</label>
+                            <input type="url" id="logoUrl" class="form-input" placeholder="https://exemplo.com/logo.jpg">
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" id="showLogo" checked>
+                            <label for="showLogo">Mostrar Logo</label>
+                        </div>
+                    </div>
+
+                    <div class="appearance-section">
                         <h4>🎯 Cores Principais</h4>
                         <div class="color-group">
                             <label>Cor Principal (Destaque)</label>
@@ -195,6 +345,38 @@
                     </div>
 
                     <div class="appearance-section">
+                        <h4>🎨 Cores dos Botões</h4>
+                        <div class="color-group">
+                            <label>Cor do Botão Primário</label>
+                            <div class="color-input-wrapper">
+                                <input type="color" id="colorBtnPrimary" value="#00ff99">
+                                <input type="text" id="colorBtnPrimaryText" class="form-input" value="#00ff99">
+                            </div>
+                        </div>
+                        <div class="color-group">
+                            <label>Cor do Texto do Botão Primário</label>
+                            <div class="color-input-wrapper">
+                                <input type="color" id="colorBtnText" value="#000000">
+                                <input type="text" id="colorBtnTextText" class="form-input" value="#000000">
+                            </div>
+                        </div>
+                        <div class="color-group">
+                            <label>Cor do Botão Secundário</label>
+                            <div class="color-input-wrapper">
+                                <input type="color" id="colorBtnSecondary" value="#333333">
+                                <input type="text" id="colorBtnSecondaryText" class="form-input" value="#333333">
+                            </div>
+                        </div>
+                        <div class="color-group">
+                            <label>Cor do Texto do Botão Secundário</label>
+                            <div class="color-input-wrapper">
+                                <input type="color" id="colorBtnSecondaryText" value="#ffffff">
+                                <input type="text" id="colorBtnSecondaryTextText" class="form-input" value="#ffffff">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="appearance-section">
                         <h4>✏️ Textos</h4>
                         <div class="color-group">
                             <label>Cor do Texto Principal</label>
@@ -204,10 +386,24 @@
                             </div>
                         </div>
                         <div class="color-group">
+                            <label>Cor do Texto Secundário</label>
+                            <div class="color-input-wrapper">
+                                <input type="color" id="colorTextSecondary" value="#888888">
+                                <input type="text" id="colorTextSecondaryText" class="form-input" value="#888888">
+                            </div>
+                        </div>
+                        <div class="color-group">
                             <label>Cor do Preço Promocional</label>
                             <div class="color-input-wrapper">
                                 <input type="color" id="colorPromo" value="#00ff99">
                                 <input type="text" id="colorPromoText" class="form-input" value="#00ff99">
+                            </div>
+                        </div>
+                        <div class="color-group">
+                            <label>Cor do Preço Original</label>
+                            <div class="color-input-wrapper">
+                                <input type="color" id="colorOriginal" value="#666666">
+                                <input type="text" id="colorOriginalText" class="form-input" value="#666666">
                             </div>
                         </div>
                     </div>
@@ -249,6 +445,39 @@
                         <div class="form-check">
                             <input type="checkbox" id="showFooter" checked>
                             <label for="showFooter">Mostrar Rodapé</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" id="showCart" checked>
+                            <label for="showCart">Mostrar Carrinho</label>
+                        </div>
+                    </div>
+
+                    <div class="appearance-section">
+                        <h4>🎛️ Layout</h4>
+                        <div class="form-group">
+                            <label for="borderRadius">Border Radius</label>
+                            <input type="range" id="borderRadius" min="0" max="20" value="12">
+                            <span id="borderRadiusValue">12px</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="fontFamily">Fonte</label>
+                            <select id="fontFamily" class="form-input">
+                                <option value="Poppins">Poppins</option>
+                                <option value="Arial">Arial</option>
+                                <option value="Helvetica">Helvetica</option>
+                                <option value="Georgia">Georgia</option>
+                                <option value="Times New Roman">Times New Roman</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="productsPerRow">Produtos por Linha</label>
+                            <select id="productsPerRow" class="form-input">
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4" selected>4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -328,10 +557,19 @@
                         <label for="whatsappMessage">Mensagem Padrão</label>
                         <textarea id="whatsappMessage" class="form-input" rows="2">Olá! Estou interessado no produto: {produto}. Ainda está disponível?</textarea>
                     </div>
+                    <div class="form-group">
+                        <label for="whatsappCartMessage">Mensagem do Carrinho</label>
+                        <textarea id="whatsappCartMessage" class="form-input" rows="3">Olá! Tenho interesse nos seguintes produtos:\n\n{carrinho}\n\nTotal: {total}\n\nAinda estão disponíveis?</textarea>
+                    </div>
                 </div>
 
                 <div class="admin-card">
                     <h3>🔧 Geral</h3>
+                    <div class="form-group">
+                        <label for="maintenancePassword">Senha para Modo Manutenção</label>
+                        <input type="password" id="maintenancePassword" class="form-input" placeholder="Digite a senha">
+                        <small>Senha: "esqueci"</small>
+                    </div>
                     <div class="form-check">
                         <input type="checkbox" id="maintenanceMode">
                         <label for="maintenanceMode">🚧 Modo Manutenção</label>
@@ -339,6 +577,50 @@
                     <div class="form-check">
                         <input type="checkbox" id="showPrices" checked>
                         <label for="showPrices">Mostrar Preços</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" id="showStock" checked>
+                        <label for="showStock">Mostrar Estoque</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" id="cartEnabled" checked>
+                        <label for="cartEnabled">Carrinho Ativado</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" id="cartQuantity" checked>
+                        <label for="cartQuantity">Controle de Quantidade</label>
+                    </div>
+                </div>
+
+                <div class="admin-card">
+                    <h3>🛒 Textos dos Botões</h3>
+                    <div class="form-group">
+                        <label for="cartBtnText">Texto do Botão do Carrinho</label>
+                        <input type="text" id="cartBtnText" class="form-input" value="Adicionar ao Carrinho">
+                    </div>
+                    <div class="form-group">
+                        <label for="buyBtnText">Texto do Botão Comprar</label>
+                        <input type="text" id="buyBtnText" class="form-input" value="Comprar no WhatsApp">
+                    </div>
+                </div>
+
+                <div class="admin-card">
+                    <h3>🌐 SEO & Analytics</h3>
+                    <div class="form-group">
+                        <label for="seoTitle">Título SEO</label>
+                        <input type="text" id="seoTitle" class="form-input" value="Loja DR">
+                    </div>
+                    <div class="form-group">
+                        <label for="seoDescription">Descrição SEO</label>
+                        <textarea id="seoDescription" class="form-input" rows="2"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="gaId">Google Analytics ID</label>
+                        <input type="text" id="gaId" class="form-input" placeholder="G-XXXXXXXXXX">
+                    </div>
+                    <div class="form-group">
+                        <label for="fbPixel">Facebook Pixel ID</label>
+                        <input type="text" id="fbPixel" class="form-input" placeholder="XXXXXXXXXX">
                     </div>
                 </div>
             </div>
@@ -501,5 +783,6 @@
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
     <script src="app.js"></script>
+    <script src="admin.js"></script>
 </body>
 </html>

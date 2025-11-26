@@ -39,6 +39,32 @@ let notifications = [];
 let editingProductId = null;
 let maintenanceMode = false;
 
+// Função para obter dados do formulário de produto
+function getProductFormData() {
+    const tamanhosSelecionados = [];
+    document.querySelectorAll('input[name="tamanhos"]:checked').forEach(checkbox => {
+        tamanhosSelecionados.push(checkbox.value);
+    });
+    
+    const coresSelecionadas = [];
+    document.querySelectorAll('input[name="cores"]:checked').forEach(checkbox => {
+        coresSelecionadas.push(checkbox.value);
+    });
+    
+    return {
+        fotoURL: getValue('imageUrl'),
+        nome: getValue('productName'),
+        descricao: getValue('productDesc'),
+        precoOriginal: parseFloat(getValue('productPrice')) || 0,
+        precoPromocional: getValue('productPromoPrice') ? parseFloat(getValue('productPromoPrice')) : null,
+        categoria: getValue('productCategory'),
+        tamanhos: tamanhosSelecionados,
+        cores: coresSelecionadas,
+        destaque: getChecked('productFeatured'),
+        ativo: getChecked('productActive')
+    };
+}
+
 // ==================== SEGURANÇA MODO MANUTENÇÃO ====================
 function checkMaintenanceMode() {
     try {
@@ -802,34 +828,37 @@ function editProduct(id) {
         
         editingProductId = id;
         
-        setValue('imageUrl', product.fotoURL || '');
-        
-        const imagePreview = $('imagePreview');
-        const uploadPlaceholder = $('uploadPlaceholder');
-        
-        if (imagePreview && product.fotoURL) {
-            imagePreview.src = product.fotoURL;
-            imagePreview.style.display = 'block';
+        // Usar a função do admin.js para popular o formulário
+        if (typeof populateEditForm === 'function') {
+            populateEditForm(product);
+        } else {
+            // Fallback se a função não estiver disponível
+            setValue('imageUrl', product.fotoURL || '');
+            setValue('productName', product.nome || '');
+            setValue('productDesc', product.descricao || '');
+            setValue('productPrice', product.precoOriginal || '');
+            setValue('productPromoPrice', product.precoPromocional || '');
+            setValue('productCategory', product.categoria || '');
+            setChecked('productFeatured', product.destaque || false);
+            setChecked('productActive', product.ativo !== false);
+            
+            // Atualizar preview da imagem
+            const imagePreview = document.getElementById('imagePreview');
+            const uploadPlaceholder = document.getElementById('uploadPlaceholder');
+            if (imagePreview && product.fotoURL) {
+                imagePreview.src = product.fotoURL;
+                imagePreview.style.display = 'block';
+            }
+            if (uploadPlaceholder) {
+                uploadPlaceholder.style.display = 'none';
+            }
         }
-        if (uploadPlaceholder) {
-            uploadPlaceholder.style.display = 'none';
-        }
-        
-        setValue('productName', product.nome || '');
-        setValue('productDesc', product.descricao || '');
-        setValue('productPrice', product.precoOriginal || '');
-        setValue('productPromoPrice', product.precoPromocional || '');
-        setValue('productCategory', product.categoria || '');
-        setValue('productSizes', product.tamanhos || '');
-        setValue('productColors', product.cores || '');
-        setChecked('productFeatured', product.destaque || false);
-        setChecked('productActive', product.ativo !== false);
         
         setText('btnProductText', 'Atualizar Produto');
         setStyle('cancelEdit', 'display', 'block');
         
         // Scroll to form
-        const tabProducts = $('tab-products');
+        const tabProducts = document.getElementById('tab-products');
         if (tabProducts) {
             tabProducts.scrollIntoView({ behavior: 'smooth' });
         }
@@ -1751,7 +1780,7 @@ async function handleProductSubmit(e) {
     
     try {
         let imageUrlValue = getValue('imageUrl');
-        const imageFile = $('imageFile');
+        const imageFile = document.getElementById('imageFile');
         
         // Upload image if file selected
         if (imageFile && imageFile.files && imageFile.files[0]) {
@@ -1763,21 +1792,14 @@ async function handleProductSubmit(e) {
             throw new Error('Adicione uma imagem');
         }
         
-        const productData = {
-            fotoURL: imageUrlValue,
-            nome: getValue('productName'),
-            descricao: getValue('productDesc'),
-            precoOriginal: parseFloat(getValue('productPrice')) || 0,
-            precoPromocional: getValue('productPromoPrice') ? parseFloat(getValue('productPromoPrice')) : null,
-            categoria: getValue('productCategory'),
-            tamanhos: getValue('productSizes'),
-            cores: getValue('productColors'),
-            destaque: getChecked('productFeatured'),
-            ativo: getChecked('productActive'),
-            dataDeCriacao: firebase.firestore.FieldValue.serverTimestamp()
-        };
+        // Obter dados do formulário usando a nova função
+        const productData = getProductFormData();
+        productData.fotoURL = imageUrlValue;
+        productData.dataDeCriacao = firebase.firestore.FieldValue.serverTimestamp();
         
         if (editingProductId) {
+            // Remover dataDeCriacao na atualização
+            delete productData.dataDeCriacao;
             await firebase.firestore().collection("produtos").doc(editingProductId).update(productData);
             showToast('Produto atualizado com sucesso!', { icon: '✅' });
             editingProductId = null;
@@ -1788,12 +1810,15 @@ async function handleProductSubmit(e) {
         
         // Reset form
         e.target.reset();
-        const imagePreview = $('imagePreview');
-        const uploadPlaceholder = $('uploadPlaceholder');
+        const imagePreview = document.getElementById('imagePreview');
+        const uploadPlaceholder = document.getElementById('uploadPlaceholder');
         if (imagePreview) imagePreview.style.display = 'none';
         if (uploadPlaceholder) uploadPlaceholder.style.display = 'block';
         setText('btnProductText', 'Adicionar Produto');
         setStyle('cancelEdit', 'display', 'none');
+        
+        // Limpar rascunho após salvar
+        localStorage.removeItem('productDraft');
         
         // Reload
         await loadProducts();

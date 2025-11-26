@@ -8,6 +8,8 @@
     --color-text-secondary: #888888;
     --color-btn-primary: #00ff99;
     --color-btn-text: #000000;
+    --color-btn-secondary: #333333;
+    --color-btn-secondary-text: #ffffff;
     --color-whatsapp: #25D366;
     --color-cart: #ff6b6b;
     --color-promo: #00ff99;
@@ -158,6 +160,43 @@ body {
     padding: 0 10px;
     position: relative;
     z-index: 2;
+}
+
+/* Grid de Checkboxes */
+.checkbox-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background: #1a1a1a;
+    border-radius: 8px;
+    border: 1px solid #333;
+    transition: all 0.3s;
+}
+
+.checkbox-item:hover {
+    border-color: var(--color-primary);
+}
+
+.checkbox-item input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--color-primary);
+    cursor: pointer;
+}
+
+.checkbox-item label {
+    font-size: 12px;
+    color: var(--color-text);
+    cursor: pointer;
+    margin: 0;
 }
 
 /* Resto do CSS permanece igual */
@@ -626,8 +665,8 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 .btn-secondary {
-    background: transparent;
-    color: var(--color-text);
+    background: var(--color-btn-secondary);
+    color: var(--color-btn-secondary-text);
     border: 2px solid #444;
     padding: 12px 24px;
     border-radius: var(--border-radius);
@@ -1704,7 +1743,7 @@ input[type="range"]::-webkit-slider-thumb {
         padding: 50px 20px;
     }
     
-    .hero h2 {
+        .hero h2 {
         font-size: 28px;
     }
     
@@ -1744,5 +1783,9 @@ input[type="range"]::-webkit-slider-thumb {
     
     .toast {
         max-width: 100%;
+    }
+    
+    .checkbox-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
 }

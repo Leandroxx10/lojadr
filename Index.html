@@ -70,11 +70,34 @@
                 <div class="admin-card">
                     <h3>➕ Adicionar Produto</h3>
                     <form id="productForm">
+                        <!-- ÁREA DE UPLOAD DE IMAGEM -->
                         <div class="form-group">
-                            <label for="imageUrl">URL da Imagem *</label>
-                            <input type="url" id="imageUrl" class="form-input" placeholder="https://exemplo.com/imagem.jpg" required>
-                            <img id="imagePreview" class="image-preview" alt="Preview" style="display:none; margin-top:10px;">
+                            <label>Upload de Imagem</label>
+                            <div id="uploadArea" class="image-upload-area">
+                                <input type="file" id="imageFile" accept="image/*" style="display: none;">
+                                <div id="uploadPlaceholder" class="upload-placeholder">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                        <polyline points="14,2 14,8 20,8"></polyline>
+                                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                                        <polyline points="10,9 9,9 8,9"></polyline>
+                                    </svg>
+                                    <p>Clique para selecionar ou arraste uma imagem</p>
+                                    <small>Formatos: JPG, PNG, GIF • Máx: 10MB</small>
+                                </div>
+                                <img id="imagePreview" class="image-preview" alt="Preview" style="display:none;">
+                            </div>
                         </div>
+
+                        <div class="divider-text">ou</div>
+
+                        <div class="form-group">
+                            <label for="imageUrl">URL da Imagem</label>
+                            <input type="url" id="imageUrl" class="form-input" placeholder="https://exemplo.com/imagem.jpg">
+                            <small>Cole a URL da imagem ou use o upload acima</small>
+                        </div>
+
                         <div class="form-group">
                             <label for="productName">Nome do Produto *</label>
                             <input type="text" id="productName" class="form-input" required>

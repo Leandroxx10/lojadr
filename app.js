@@ -718,9 +718,12 @@ async function loadAdminProducts() {
     }
 }
 
+// ==================== IMAGE UPLOAD SYSTEM ====================
 // Upload to ImgBB
 async function uploadToImgBB(file) {
     try {
+        showToast('Fazendo upload da imagem...', { icon: '⏳', duration: 3000 });
+        
         const formData = new FormData();
         formData.append('image', file);
         
@@ -730,13 +733,64 @@ async function uploadToImgBB(file) {
         });
         
         const data = await response.json();
+        
         if (data.success) {
+            showToast('Imagem enviada com sucesso!', { icon: '✅' });
             return data.data.url;
+        } else {
+            throw new Error(data.error?.message || 'Upload failed');
         }
-        throw new Error('Upload failed');
     } catch (error) {
         console.error('Erro no upload da imagem:', error);
+        showToast('Erro ao enviar imagem: ' + error.message, { bgColor: '#ff4757', icon: '✕' });
         throw error;
+    }
+}
+
+// Handle image file selection
+function handleImageFile(file) {
+    try {
+        const imagePreview = $('imagePreview');
+        const uploadPlaceholder = $('uploadPlaceholder');
+        const imageUrl = $('imageUrl');
+        
+        if (!file || !file.type.startsWith('image/')) {
+            showToast('Por favor, selecione um arquivo de imagem válido', { bgColor: '#ff4757', icon: '✕' });
+            return;
+        }
+        
+        // Verificar tamanho do arquivo (máximo 10MB)
+        if (file.size > 10 * 1024 * 1024) {
+            showToast('A imagem é muito grande. Máximo 10MB permitido.', { bgColor: '#ff4757', icon: '✕' });
+            return;
+        }
+        
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            if (imagePreview) {
+                imagePreview.src = e.target.result;
+                imagePreview.style.display = 'block';
+            }
+            if (uploadPlaceholder) {
+                uploadPlaceholder.style.display = 'none';
+            }
+        };
+        reader.readAsDataURL(file);
+        
+        // Fazer upload automático para ImgBB
+        uploadToImgBB(file).then(imageUrlValue => {
+            if (imageUrl && imageUrlValue) {
+                imageUrl.value = imageUrlValue;
+                showToast('URL da imagem atualizada automaticamente!', { icon: '🔗' });
+            }
+        }).catch(error => {
+            console.error('Upload automático falhou:', error);
+            // O usuário ainda pode usar a imagem local ou inserir URL manualmente
+        });
+        
+    } catch (error) {
+        console.error('Erro ao processar imagem:', error);
+        showToast('Erro ao processar imagem', { bgColor: '#ff4757', icon: '✕' });
     }
 }
 
@@ -1506,7 +1560,7 @@ function initEventListeners() {
             };
         });
         
-        // Image upload area
+        // Image upload area - AGORA COM UPLOAD AUTOMÁTICO
         const uploadArea = $('uploadArea');
         const imageFile = $('imageFile');
         const imagePreview = $('imagePreview');
@@ -1686,27 +1740,6 @@ function initEventListeners() {
     }
 }
 
-function handleImageFile(file) {
-    try {
-        const imagePreview = $('imagePreview');
-        const uploadPlaceholder = $('uploadPlaceholder');
-        
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            if (imagePreview) {
-                imagePreview.src = e.target.result;
-                imagePreview.style.display = 'block';
-            }
-            if (uploadPlaceholder) {
-                uploadPlaceholder.style.display = 'none';
-            }
-        };
-        reader.readAsDataURL(file);
-    } catch (error) {
-        console.error('Erro ao processar imagem:', error);
-    }
-}
-
 async function handleProductSubmit(e) {
     e.preventDefault();
     
@@ -1722,6 +1755,7 @@ async function handleProductSubmit(e) {
         
         // Upload image if file selected
         if (imageFile && imageFile.files && imageFile.files[0]) {
+            showToast('Fazendo upload da imagem...', { icon: '⏳', duration: 2000 });
             imageUrlValue = await uploadToImgBB(imageFile.files[0]);
         }
         
@@ -1745,11 +1779,11 @@ async function handleProductSubmit(e) {
         
         if (editingProductId) {
             await firebase.firestore().collection("produtos").doc(editingProductId).update(productData);
-            showToast('Produto atualizado com sucesso!', { icon: '✓' });
+            showToast('Produto atualizado com sucesso!', { icon: '✅' });
             editingProductId = null;
         } else {
             await firebase.firestore().collection("produtos").add(productData);
-            showToast('Produto adicionado com sucesso!', { icon: '✓' });
+            showToast('Produto adicionado com sucesso!', { icon: '✅' });
         }
         
         // Reset form
@@ -1835,7 +1869,7 @@ async function handleEditSubmit(e) {
         });
         
         removeClass('editModal', 'show');
-        showToast('Produto atualizado com sucesso!', { icon: '✓' });
+        showToast('Produto atualizado com sucesso!', { icon: '✅' });
         
         await loadProducts();
         await loadAdminProducts();

@@ -35,6 +35,49 @@ body {
     line-height: 1.6;
 }
 
+/* Modo Manutenção */
+.maintenance-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.maintenance-content {
+    background: var(--color-cards);
+    padding: 40px;
+    border-radius: var(--border-radius);
+    border: 2px solid var(--color-primary);
+    max-width: 500px;
+    margin: 20px;
+}
+
+.maintenance-icon {
+    font-size: 60px;
+    margin-bottom: 20px;
+}
+
+.maintenance-content h2 {
+    color: var(--color-primary);
+    margin-bottom: 15px;
+    font-size: 28px;
+}
+
+.maintenance-content p {
+    color: var(--color-text-secondary);
+    margin-bottom: 25px;
+    font-size: 16px;
+}
+
+/* Resto do CSS permanece igual */
 ::-webkit-scrollbar {
     width: 8px;
 }
@@ -1032,7 +1075,7 @@ input[type="range"]::-webkit-slider-thumb {
     color: var(--color-text-secondary);
     margin-bottom: 15px;
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-amp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }

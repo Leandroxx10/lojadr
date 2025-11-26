@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Loja DR - Moda & Estilo. As melhores roupas com os melhores preços.">
+    <meta name="theme-color" content="#000000">
     <title>Loja DR - Moda & Estilo</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -10,10 +12,8 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Notification Banner -->
     <div id="notificationBanner" class="notification-banner"></div>
 
-    <!-- Header -->
     <header class="header" id="header">
         <div class="header-content">
             <div class="logo-container">
@@ -24,7 +24,7 @@
                 </div>
             </div>
             <div class="header-actions">
-                <button id="cartBtn" class="cart-btn">
+                <button id="cartBtn" class="cart-btn" type="button">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <circle cx="9" cy="21" r="1"></circle>
                         <circle cx="20" cy="21" r="1"></circle>
@@ -32,94 +32,78 @@
                     </svg>
                     <span id="cartCount">0</span>
                 </button>
-                <button id="adminBtn" class="btn-admin">
+                <button id="adminBtn" class="btn-admin" type="button">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M12 2a5 5 0 0 1 5 5v3a5 5 0 0 1-10 0V7a5 5 0 0 1 5-5z"></path>
-                        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                     </svg>
                 </button>
-                <button id="logoutBtn" class="btn-logout" style="display:none;">
-                    Sair
-                </button>
+                <button id="logoutBtn" class="btn-logout" type="button" style="display:none;">Sair</button>
             </div>
         </div>
     </header>
 
-    <!-- Admin Panel -->
     <div id="adminPanel" class="admin-panel" style="display:none;">
         <div class="admin-header">
             <h2>⚙️ Painel Administrativo</h2>
             <div class="admin-tabs">
-                <button class="tab-btn active" data-tab="products">📦 Produtos</button>
-                <button class="tab-btn" data-tab="appearance">🎨 Aparência</button>
-                <button class="tab-btn" data-tab="notifications">🔔 Notificações</button>
-                <button class="tab-btn" data-tab="settings">⚙️ Configurações</button>
-                <button class="tab-btn" data-tab="analytics">📊 Relatórios</button>
+                <button class="tab-btn active" type="button" data-tab="products">📦 Produtos</button>
+                <button class="tab-btn" type="button" data-tab="appearance">🎨 Aparência</button>
+                <button class="tab-btn" type="button" data-tab="notifications">🔔 Notificações</button>
+                <button class="tab-btn" type="button" data-tab="settings">⚙️ Configurações</button>
+                <button class="tab-btn" type="button" data-tab="analytics">📊 Relatórios</button>
             </div>
         </div>
 
-        <!-- Tab: Products -->
         <div id="tab-products" class="tab-content active">
             <div class="admin-grid">
                 <div class="admin-card">
                     <h3>➕ Adicionar Produto</h3>
                     <form id="productForm">
                         <div class="form-group">
-                            <label>Imagem do Produto</label>
-                            <div class="image-upload-area" id="uploadArea">
-                                <input type="file" id="imageFile" accept="image/*" hidden>
-                                <div class="upload-placeholder" id="uploadPlaceholder">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
-                                        <polyline points="21 15 16 10 5 21"></polyline>
-                                    </svg>
-                                    <p>Clique ou arraste uma imagem</p>
-                                </div>
-                                <img id="imagePreview" class="image-preview" style="display:none;">
-                            </div>
-                            <span class="divider-text">ou cole uma URL</span>
-                            <input type="url" id="imageUrl" class="form-input" placeholder="https://exemplo.com/imagem.jpg">
+                            <label for="imageUrl">URL da Imagem *</label>
+                            <input type="url" id="imageUrl" class="form-input" placeholder="https://exemplo.com/imagem.jpg" required>
+                            <img id="imagePreview" class="image-preview" alt="Preview" style="display:none; margin-top:10px;">
                         </div>
                         <div class="form-group">
-                            <label>Nome do Produto *</label>
+                            <label for="productName">Nome do Produto *</label>
                             <input type="text" id="productName" class="form-input" required>
                         </div>
                         <div class="form-group">
-                            <label>Descrição *</label>
+                            <label for="productDesc">Descrição *</label>
                             <textarea id="productDesc" class="form-input" rows="3" required></textarea>
                         </div>
                         <div class="form-row">
                             <div class="form-group">
-                                <label>Preço Original *</label>
-                                <input type="number" id="productPrice" class="form-input" step="0.01" required>
+                                <label for="productPrice">Preço Original *</label>
+                                <input type="number" id="productPrice" class="form-input" step="0.01" min="0" required>
                             </div>
                             <div class="form-group">
-                                <label>Preço Promocional</label>
-                                <input type="number" id="productPromoPrice" class="form-input" step="0.01">
+                                <label for="productPromoPrice">Preço Promocional</label>
+                                <input type="number" id="productPromoPrice" class="form-input" step="0.01" min="0">
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group">
-                                <label>Categoria</label>
+                                <label for="productCategory">Categoria</label>
                                 <select id="productCategory" class="form-input">
                                     <option value="">Selecione...</option>
-                                    <option value="camisetas">Camisetas</option>
-                                    <option value="calcas">Calças</option>
-                                    <option value="vestidos">Vestidos</option>
-                                    <option value="bermudas">Bermudas</option>
-                                    <option value="bones">Bonés</option>
-                                    <option value="tenis">Tênis</option>
-                                    <option value="acessorios">Acessórios</option>
+                                    <option value="Camisetas">Camisetas</option>
+                                    <option value="Calças">Calças</option>
+                                    <option value="Vestidos">Vestidos</option>
+                                    <option value="Bermudas">Bermudas</option>
+                                    <option value="Bonés">Bonés</option>
+                                    <option value="Tênis">Tênis</option>
+                                    <option value="Acessórios">Acessórios</option>
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label>Tamanhos</label>
+                                <label for="productSizes">Tamanhos</label>
                                 <input type="text" id="productSizes" class="form-input" placeholder="P, M, G, GG">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label>Cores Disponíveis</label>
+                            <label for="productColors">Cores Disponíveis</label>
                             <input type="text" id="productColors" class="form-input" placeholder="Preto, Branco, Azul">
                         </div>
                         <div class="form-check">
@@ -130,12 +114,8 @@
                             <input type="checkbox" id="productActive" checked>
                             <label for="productActive">✅ Produto Ativo</label>
                         </div>
-                        <button type="submit" class="btn-primary btn-block">
-                            <span id="btnProductText">Adicionar Produto</span>
-                        </button>
-                        <button type="button" id="cancelEdit" class="btn-secondary btn-block" style="display:none;">
-                            Cancelar Edição
-                        </button>
+                        <button type="submit" class="btn-primary btn-block" id="btnSubmitProduct">Adicionar Produto</button>
+                        <button type="button" id="cancelEdit" class="btn-secondary btn-block" style="display:none;">Cancelar Edição</button>
                     </form>
                 </div>
 
@@ -149,11 +129,9 @@
             </div>
         </div>
 
-        <!-- Tab: Appearance -->
         <div id="tab-appearance" class="tab-content">
             <div class="admin-card full-width">
                 <h3>🎨 Personalizar Aparência</h3>
-                <p class="card-desc">Personalize todas as cores e estilos do seu site</p>
                 
                 <div class="appearance-grid">
                     <div class="appearance-section">
@@ -179,13 +157,6 @@
                                 <input type="text" id="colorCardsText" class="form-input" value="#111111">
                             </div>
                         </div>
-                        <div class="color-group">
-                            <label>Cor do Header</label>
-                            <div class="color-input-wrapper">
-                                <input type="color" id="colorHeader" value="#000000">
-                                <input type="text" id="colorHeaderText" class="form-input" value="#000000">
-                            </div>
-                        </div>
                     </div>
 
                     <div class="appearance-section">
@@ -198,103 +169,30 @@
                             </div>
                         </div>
                         <div class="color-group">
-                            <label>Cor do Texto Secundário</label>
-                            <div class="color-input-wrapper">
-                                <input type="color" id="colorTextSecondary" value="#888888">
-                                <input type="text" id="colorTextSecondaryText" class="form-input" value="#888888">
-                            </div>
-                        </div>
-                        <div class="color-group">
                             <label>Cor do Preço Promocional</label>
                             <div class="color-input-wrapper">
                                 <input type="color" id="colorPromo" value="#00ff99">
                                 <input type="text" id="colorPromoText" class="form-input" value="#00ff99">
                             </div>
                         </div>
-                        <div class="color-group">
-                            <label>Cor do Preço Original</label>
-                            <div class="color-input-wrapper">
-                                <input type="color" id="colorOriginal" value="#666666">
-                                <input type="text" id="colorOriginalText" class="form-input" value="#666666">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="appearance-section">
-                        <h4>🔘 Botões</h4>
-                        <div class="color-group">
-                            <label>Cor do Botão Principal</label>
-                            <div class="color-input-wrapper">
-                                <input type="color" id="colorBtnPrimary" value="#00ff99">
-                                <input type="text" id="colorBtnPrimaryText" class="form-input" value="#00ff99">
-                            </div>
-                        </div>
-                        <div class="color-group">
-                            <label>Texto do Botão Principal</label>
-                            <div class="color-input-wrapper">
-                                <input type="color" id="colorBtnText" value="#000000">
-                                <input type="text" id="colorBtnTextText" class="form-input" value="#000000">
-                            </div>
-                        </div>
-                        <div class="color-group">
-                            <label>Cor do Botão WhatsApp</label>
-                            <div class="color-input-wrapper">
-                                <input type="color" id="colorWhatsapp" value="#25D366">
-                                <input type="text" id="colorWhatsappText" class="form-input" value="#25D366">
-                            </div>
-                        </div>
-                        <div class="color-group">
-                            <label>Cor do Carrinho</label>
-                            <div class="color-input-wrapper">
-                                <input type="color" id="colorCart" value="#ff6b6b">
-                                <input type="text" id="colorCartText" class="form-input" value="#ff6b6b">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="appearance-section">
-                        <h4>📐 Layout</h4>
-                        <div class="form-group">
-                            <label>Raio das Bordas</label>
-                            <input type="range" id="borderRadius" min="0" max="30" value="12">
-                            <span id="borderRadiusValue">12px</span>
-                        </div>
-                        <div class="form-group">
-                            <label>Fonte do Site</label>
-                            <select id="fontFamily" class="form-input">
-                                <option value="Poppins">Poppins</option>
-                                <option value="Inter">Inter</option>
-                                <option value="Montserrat">Montserrat</option>
-                                <option value="Roboto">Roboto</option>
-                                <option value="Open Sans">Open Sans</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Produtos por Linha (Desktop)</label>
-                            <select id="productsPerRow" class="form-input">
-                                <option value="3">3 produtos</option>
-                                <option value="4" selected>4 produtos</option>
-                                <option value="5">5 produtos</option>
-                            </select>
-                        </div>
                     </div>
 
                     <div class="appearance-section">
                         <h4>🏷️ Identidade</h4>
                         <div class="form-group">
-                            <label>Nome da Loja</label>
+                            <label for="inputStoreName">Nome da Loja</label>
                             <input type="text" id="inputStoreName" class="form-input" value="Loja DR">
                         </div>
                         <div class="form-group">
-                            <label>Slogan</label>
+                            <label for="inputStoreSlogan">Slogan</label>
                             <input type="text" id="inputStoreSlogan" class="form-input" value="Moda & Estilo">
                         </div>
                         <div class="form-group">
-                            <label>Título do Banner</label>
+                            <label for="inputHeroTitle">Título do Banner</label>
                             <input type="text" id="inputHeroTitle" class="form-input" value="Descubra seu Estilo">
                         </div>
                         <div class="form-group">
-                            <label>Subtítulo do Banner</label>
+                            <label for="inputHeroSubtitle">Subtítulo do Banner</label>
                             <input type="text" id="inputHeroSubtitle" class="form-input" value="Peças exclusivas selecionadas para você">
                         </div>
                     </div>
@@ -317,84 +215,60 @@
                             <input type="checkbox" id="showFooter" checked>
                             <label for="showFooter">Mostrar Rodapé</label>
                         </div>
-                        <div class="form-check">
-                            <input type="checkbox" id="showCart" checked>
-                            <label for="showCart">Habilitar Carrinho</label>
-                        </div>
                     </div>
                 </div>
 
                 <div class="appearance-actions">
-                    <button id="resetAppearance" class="btn-secondary">
-                        🔄 Resetar Padrão
-                    </button>
-                    <button id="saveAppearance" class="btn-primary">
-                        💾 Salvar Aparência
-                    </button>
+                    <button type="button" id="resetAppearance" class="btn-secondary">🔄 Resetar Padrão</button>
+                    <button type="button" id="saveAppearance" class="btn-primary">💾 Salvar Aparência</button>
                 </div>
             </div>
         </div>
 
-        <!-- Tab: Notifications -->
         <div id="tab-notifications" class="tab-content">
             <div class="admin-grid">
                 <div class="admin-card">
                     <h3>📢 Criar Notificação</h3>
                     <form id="notificationForm">
                         <div class="form-group">
-                            <label>Mensagem *</label>
-                            <input type="text" id="notifMessage" class="form-input" placeholder="Ex: Frete grátis em compras acima de R$199!" required>
+                            <label for="notifMessage">Mensagem *</label>
+                            <input type="text" id="notifMessage" class="form-input" placeholder="Ex: Frete grátis acima de R$199!" required>
                         </div>
                         <div class="form-group">
-                            <label>Tipo de Notificação</label>
+                            <label for="notifType">Tipo</label>
                             <select id="notifType" class="form-input">
                                 <option value="banner">Banner no Topo</option>
-                                <option value="toast">Toast (Canto da Tela)</option>
+                                <option value="toast">Toast (Canto)</option>
                                 <option value="popup">Popup Central</option>
                             </select>
                         </div>
                         <div class="form-row">
                             <div class="form-group">
-                                <label>Cor de Fundo</label>
-                                <div class="color-input-wrapper">
-                                    <input type="color" id="notifBgColor" value="#00ff99">
-                                    <input type="text" id="notifBgColorText" class="form-input" value="#00ff99">
-                                </div>
+                                <label for="notifBgColor">Cor de Fundo</label>
+                                <input type="color" id="notifBgColor" value="#00ff99">
                             </div>
                             <div class="form-group">
-                                <label>Cor do Texto</label>
-                                <div class="color-input-wrapper">
-                                    <input type="color" id="notifTextColor" value="#000000">
-                                    <input type="text" id="notifTextColorText" class="form-input" value="#000000">
-                                </div>
+                                <label for="notifTextColor">Cor do Texto</label>
+                                <input type="color" id="notifTextColor" value="#000000">
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group">
-                                <label>Duração (segundos)</label>
+                                <label for="notifDuration">Duração (seg)</label>
                                 <input type="number" id="notifDuration" class="form-input" value="5" min="0">
-                                <small>0 = permanente</small>
                             </div>
                             <div class="form-group">
-                                <label>Ícone (emoji)</label>
+                                <label for="notifIcon">Ícone</label>
                                 <input type="text" id="notifIcon" class="form-input" value="🔥" maxlength="2">
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label>Link (opcional)</label>
-                            <input type="url" id="notifLink" class="form-input" placeholder="https://...">
                         </div>
                         <div class="form-check">
                             <input type="checkbox" id="notifActive" checked>
                             <label for="notifActive">Ativar Notificação</label>
                         </div>
                         <div class="form-actions">
-                            <button type="button" id="previewNotif" class="btn-secondary">
-                                👁️ Preview
-                            </button>
-                            <button type="submit" class="btn-primary">
-                                💾 Salvar
-                            </button>
+                            <button type="button" id="previewNotif" class="btn-secondary">👁️ Preview</button>
+                            <button type="submit" class="btn-primary">💾 Salvar</button>
                         </div>
                     </form>
                 </div>
@@ -406,43 +280,18 @@
             </div>
         </div>
 
-        <!-- Tab: Settings -->
         <div id="tab-settings" class="tab-content">
             <div class="admin-grid">
                 <div class="admin-card">
                     <h3>📱 WhatsApp</h3>
                     <div class="form-group">
-                        <label>Número do WhatsApp</label>
+                        <label for="whatsappNumber">Número do WhatsApp</label>
                         <input type="text" id="whatsappNumber" class="form-input" value="5511963290107">
                         <small>Formato: código do país + DDD + número</small>
                     </div>
                     <div class="form-group">
-                        <label>Mensagem Padrão (um produto)</label>
+                        <label for="whatsappMessage">Mensagem Padrão</label>
                         <textarea id="whatsappMessage" class="form-input" rows="2">Olá! Estou interessado no produto: {produto}. Ainda está disponível?</textarea>
-                    </div>
-                    <div class="form-group">
-                        <label>Mensagem Carrinho (múltiplos produtos)</label>
-                        <textarea id="whatsappCartMessage" class="form-input" rows="3">Olá! Tenho interesse nos seguintes produtos:\n\n{carrinho}\n\nTotal: {total}\n\nAinda estão disponíveis?</textarea>
-                    </div>
-                </div>
-
-                <div class="admin-card">
-                    <h3>🛒 Carrinho</h3>
-                    <div class="form-check">
-                        <input type="checkbox" id="cartEnabled" checked>
-                        <label for="cartEnabled">Habilitar Carrinho de Compras</label>
-                    </div>
-                    <div class="form-check">
-                        <input type="checkbox" id="cartQuantity" checked>
-                        <label for="cartQuantity">Permitir Quantidade por Item</label>
-                    </div>
-                    <div class="form-group">
-                        <label>Texto do Botão "Adicionar"</label>
-                        <input type="text" id="cartBtnText" class="form-input" value="Adicionar ao Carrinho">
-                    </div>
-                    <div class="form-group">
-                        <label>Texto do Botão "Comprar Direto"</label>
-                        <input type="text" id="buyBtnText" class="form-input" value="Comprar no WhatsApp">
                     </div>
                 </div>
 
@@ -456,52 +305,15 @@
                         <input type="checkbox" id="showPrices" checked>
                         <label for="showPrices">Mostrar Preços</label>
                     </div>
-                    <div class="form-check">
-                        <input type="checkbox" id="showStock" checked>
-                        <label for="showStock">Mostrar Disponibilidade</label>
-                    </div>
-                    <div class="form-group">
-                        <label>Moeda</label>
-                        <select id="currency" class="form-input">
-                            <option value="BRL">R$ (Real)</option>
-                            <option value="USD">$ (Dólar)</option>
-                            <option value="EUR">€ (Euro)</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="admin-card">
-                    <h3>📊 SEO & Analytics</h3>
-                    <div class="form-group">
-                        <label>Título da Página (SEO)</label>
-                        <input type="text" id="seoTitle" class="form-input" value="Loja DR - Moda & Estilo">
-                    </div>
-                    <div class="form-group">
-                        <label>Descrição (SEO)</label>
-                        <textarea id="seoDescription" class="form-input" rows="2">As melhores roupas com os melhores preços</textarea>
-                    </div>
-                    <div class="form-group">
-                        <label>Google Analytics ID</label>
-                        <input type="text" id="gaId" class="form-input" placeholder="G-XXXXXXXXXX">
-                    </div>
-                    <div class="form-group">
-                        <label>Facebook Pixel ID</label>
-                        <input type="text" id="fbPixel" class="form-input" placeholder="123456789">
-                    </div>
                 </div>
             </div>
             
             <div class="settings-actions">
-                <button id="exportData" class="btn-secondary">
-                    📥 Exportar Dados
-                </button>
-                <button id="saveSettings" class="btn-primary">
-                    💾 Salvar Configurações
-                </button>
+                <button type="button" id="exportData" class="btn-secondary">📥 Exportar Dados</button>
+                <button type="button" id="saveSettings" class="btn-primary">💾 Salvar Configurações</button>
             </div>
         </div>
 
-        <!-- Tab: Analytics -->
         <div id="tab-analytics" class="tab-content">
             <div class="admin-grid">
                 <div class="admin-card stat-card">
@@ -546,7 +358,6 @@
         </div>
     </div>
 
-    <!-- Hero Section -->
     <section id="heroSection" class="hero">
         <div class="hero-content">
             <h2 id="heroTitle">Descubra seu <span>Estilo</span></h2>
@@ -554,7 +365,6 @@
         </div>
     </section>
 
-    <!-- Filters -->
     <section id="filtersSection" class="filters">
         <div class="search-container" id="searchContainer">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -564,17 +374,13 @@
             <input type="text" id="searchInput" placeholder="Buscar produtos...">
         </div>
         <div class="categories" id="categoriesContainer">
-            <button class="cat-btn active" data-category="all">Todos</button>
+            <button class="cat-btn active" type="button" data-category="all">Todos</button>
         </div>
     </section>
 
-    <!-- Products Grid -->
     <main class="products-container">
         <div id="productsGrid" class="products-grid"></div>
         <div id="emptyState" class="empty-state" style="display:none;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-                <path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
-            </svg>
             <h3>Nenhum produto encontrado</h3>
             <p>Tente buscar por outro termo ou categoria</p>
         </div>
@@ -584,7 +390,6 @@
         </div>
     </main>
 
-    <!-- Footer -->
     <footer id="footer" class="footer">
         <div class="footer-content">
             <div class="footer-logo">
@@ -592,21 +397,17 @@
                 <span id="footerStoreName">Loja DR</span>
             </div>
             <p>© 2024 Todos os direitos reservados</p>
-            <a href="#" id="footerWhatsapp" class="footer-whatsapp" target="_blank">
-                <svg viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-                </svg>
-                Fale conosco no WhatsApp
+            <a href="https://wa.me/5511963290107" id="footerWhatsapp" class="footer-whatsapp" target="_blank" rel="noopener">
+                📱 Fale conosco no WhatsApp
             </a>
         </div>
     </footer>
 
-    <!-- Cart Sidebar -->
     <div id="cartOverlay" class="cart-overlay"></div>
     <aside id="cartSidebar" class="cart-sidebar">
         <div class="cart-header">
             <h3>🛒 Seu Carrinho</h3>
-            <button id="closeCart" class="close-cart">&times;</button>
+            <button id="closeCart" class="close-cart" type="button">&times;</button>
         </div>
         <div id="cartItems" class="cart-items"></div>
         <div class="cart-footer">
@@ -614,46 +415,37 @@
                 <span>Total:</span>
                 <strong id="cartTotal">R$ 0,00</strong>
             </div>
-            <button id="checkoutBtn" class="btn-whatsapp btn-block">
-                <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
-                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-                </svg>
-                Finalizar no WhatsApp
-            </button>
-            <button id="clearCart" class="btn-secondary btn-block">
-                🗑️ Limpar Carrinho
-            </button>
+            <button id="checkoutBtn" class="btn-whatsapp btn-block" type="button">📱 Finalizar no WhatsApp</button>
+            <button id="clearCart" class="btn-secondary btn-block" type="button">🗑️ Limpar Carrinho</button>
         </div>
     </aside>
 
-    <!-- Image Modal -->
     <div id="imageModal" class="image-modal">
         <div class="image-modal-content">
-            <button class="image-modal-close">&times;</button>
-            <img id="modalImage" src="" alt="">
+            <button class="image-modal-close" id="closeImageModal" type="button">&times;</button>
+            <img id="modalImage" src="" alt="Produto">
             <div class="image-modal-info">
                 <h3 id="modalTitle"></h3>
                 <p id="modalPrice"></p>
             </div>
             <div class="image-modal-nav">
-                <button id="prevImage" class="nav-btn">❮</button>
-                <button id="nextImage" class="nav-btn">❯</button>
+                <button id="prevImage" class="nav-btn" type="button">❮</button>
+                <button id="nextImage" class="nav-btn" type="button">❯</button>
             </div>
         </div>
     </div>
 
-    <!-- Login Modal -->
     <div id="loginModal" class="modal">
         <div class="modal-content">
-            <button class="modal-close">&times;</button>
+            <button class="modal-close" id="closeLoginModal" type="button">&times;</button>
             <h3>🔐 Login Administrativo</h3>
             <form id="loginForm">
                 <div class="form-group">
-                    <label>Email</label>
+                    <label for="loginEmail">Email</label>
                     <input type="email" id="loginEmail" class="form-input" required>
                 </div>
                 <div class="form-group">
-                    <label>Senha</label>
+                    <label for="loginPassword">Senha</label>
                     <input type="password" id="loginPassword" class="form-input" required>
                 </div>
                 <button type="submit" class="btn-primary btn-block">Entrar</button>
@@ -661,83 +453,18 @@
         </div>
     </div>
 
-    <!-- Edit Product Modal -->
-    <div id="editModal" class="modal">
-        <div class="modal-content modal-lg">
-            <button class="modal-close" data-modal="editModal">&times;</button>
-            <h3>✏️ Editar Produto</h3>
-            <form id="editForm">
-                <input type="hidden" id="editId">
-                <div class="form-group">
-                    <label>URL da Imagem</label>
-                    <input type="url" id="editImageUrl" class="form-input">
-                    <img id="editImagePreview" class="edit-image-preview">
-                </div>
-                <div class="form-group">
-                    <label>Nome</label>
-                    <input type="text" id="editName" class="form-input" required>
-                </div>
-                <div class="form-group">
-                    <label>Descrição</label>
-                    <textarea id="editDesc" class="form-input" rows="3" required></textarea>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Preço Original</label>
-                        <input type="number" id="editPrice" class="form-input" step="0.01" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Preço Promocional</label>
-                        <input type="number" id="editPromoPrice" class="form-input" step="0.01">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Categoria</label>
-                        <select id="editCategory" class="form-input">
-                            <option value="">Selecione...</option>
-                            <option value="camisetas">Camisetas</option>
-                            <option value="calcas">Calças</option>
-                            <option value="vestidos">Vestidos</option>
-                            <option value="bermudas">Bermudas</option>
-                            <option value="bones">Bonés</option>
-                            <option value="tenis">Tênis</option>
-                            <option value="acessorios">Acessórios</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Tamanhos</label>
-                        <input type="text" id="editSizes" class="form-input">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Cores</label>
-                    <input type="text" id="editColors" class="form-input">
-                </div>
-                <div class="form-check">
-                    <input type="checkbox" id="editFeatured">
-                    <label for="editFeatured">⭐ Produto em Destaque</label>
-                </div>
-                <div class="form-check">
-                    <input type="checkbox" id="editActive">
-                    <label for="editActive">✅ Produto Ativo</label>
-                </div>
-                <button type="submit" class="btn-primary btn-block">Salvar Alterações</button>
-            </form>
-        </div>
-    </div>
-
-    <!-- Popup Notification Modal -->
     <div id="popupModal" class="modal popup-modal">
         <div class="modal-content popup-content">
-            <button class="modal-close popup-close">&times;</button>
+            <button class="modal-close popup-close" id="closePopupModal" type="button">&times;</button>
             <div id="popupBody"></div>
         </div>
     </div>
 
-    <!-- Toast Container -->
     <div id="toastContainer" class="toast-container"></div>
 
-    <script src="app.js" type="module"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
